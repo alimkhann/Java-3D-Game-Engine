@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="lwjgl">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/slick-util/lib/ibxm.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slick-util/lib/jogg-0.0.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slick-util/lib/jorbis-0.0.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slick-util/lib/lwjgl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slick-util/lib/lwjgl_util.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slick-util/lib/lwjgl_util_applet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slick-util/lib/natives-linux.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slick-util/lib/natives-mac.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slick-util/lib/natives-windows.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slick-util/lib/slick-util.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/slick-util/lib/slick-util-src.zip!/" />
+    </SOURCES>
+  </library>
+</component>
