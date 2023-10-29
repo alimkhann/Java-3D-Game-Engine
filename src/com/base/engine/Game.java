@@ -14,7 +14,7 @@ public class Game {
             System.out.println("Released 'W'");
 
         if (Input.getMouseDown(1))
-            System.out.println("Pressed 'RMB'");
+            System.out.println("Pressed 'RMB' at " + Input.getMousePosition().toString());
         if (Input.getMouseUp(1))
             System.out.println("Released 'RMB'");
     }

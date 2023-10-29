@@ -1,35 +1,31 @@
 package com.base.engine;
 
 public class MainComponent {
-    // Constants for the window dimensions and title.
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
     public static final String TITLE = "3D Game Engine";
     public static final double FRAME_CAP = 10000.0; // Maximum frame rate
 
-    private boolean isRunning; // Flag to track if the game is running
+    private boolean isRunning;
     private final Game game;
 
-    // Constructor initializes the game and sets isRunning to false
     public MainComponent() {
         isRunning = false;
         game = new Game();
     }
 
-    // Method to start the game
     public void start() {
         if (isRunning)
             return;
 
-        run(); // Start the game loop
+        run();
     }
 
-    // Method to stop the game
     public void stop() {
         if(!isRunning)
             return;
 
-        isRunning = false; // Stop the game loop
+        isRunning = false;
     }
 
     private void run() {
@@ -78,7 +74,7 @@ public class MainComponent {
                 game.input();
                 game.update();
 
-                // If a second has passed (used for frame rate monitoring)
+                // If a second has passed (used for frame rate monitoring) - print the frame count
                 if (frameCounter >= Time.SECOND) {
                     // Print the frame count for monitoring purposes
                     System.out.println(frames);
@@ -103,17 +99,14 @@ public class MainComponent {
             }
         }
 
-        // When the game loop ends, perform cleanup tasks
         cleanUp();
     }
 
-    // Method to render the game
     private void render() {
         game.render();
         Window.render();
     }
 
-    // Method to clean up and close the game
     private void cleanUp() {
         Window.dispose();
     }
