@@ -16,10 +16,6 @@ public class Vector2f {
         return x * r.getX() + y * r.getY();
     }
 
-    public String toString () {
-        return "(" + x + " " + y + ")";
-    }
-
     public Vector2f normalize() {
         float length = length();
 
@@ -30,7 +26,11 @@ public class Vector2f {
     }
 
     public Vector2f rotate(float angle) {
-        return null;
+        double rad = (double) Math.toRadians(angle);
+        double cos = (double) Math.cos(rad);
+        double sin = (double) Math.sin(rad);
+
+        return new Vector2f((float) (x * cos - y * sin), (float) (x * sin + y * cos));
     }
 
     public Vector2f add(Vector2f r) {
@@ -63,6 +63,10 @@ public class Vector2f {
 
     public Vector2f div(float r) {
         return new Vector2f(x / r, y / r);
+    }
+
+    public String toString() {
+        return "(" + x + " " + y + ")";
     }
 
     public float getX() {
