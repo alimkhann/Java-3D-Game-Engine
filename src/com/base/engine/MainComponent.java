@@ -4,7 +4,7 @@ public class MainComponent {
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
     public static final String TITLE = "3D Game Engine";
-    public static final double FRAME_CAP = 10000.0; // Maximum frame rate
+    public static final double FRAME_CAP = 10000.0;
 
     private boolean isRunning;
     private final Game game;
@@ -30,45 +30,34 @@ public class MainComponent {
     }
 
     private void run() {
-        isRunning = true; // Set the game as running
+        isRunning = true;
 
-        // Initialize frame count and frame time tracking variables
         int frames = 0;
         long frameCounter = 0;
 
-        // Define the time allocated for each frame (inverse of FRAME_CAP)
         final double frameTime = 1.0 / FRAME_CAP;
 
-        // Initialize the last recorded time.
         long lastTime = Time.getTime();
-        // Initialize unprocessed time for frame time calculation.
         double unprocessedTime = 0;
 
-        // Game loop: continues as long as the game is running
         while (isRunning) {
-            boolean render = false; // Flag to determine whether to render
+            boolean render = false;
 
-            long startTime = Time.getTime(); // Record the current time.
-            long pastTime = startTime - lastTime; // Calculate time passed since the last frame.
-            lastTime = startTime; // Update last recorded time.
+            long startTime = Time.getTime();
+            long pastTime = startTime - lastTime;
+            lastTime = startTime;
 
-            // Accumulate the time passed since the last frame.
             unprocessedTime += pastTime / (double) Time.SECOND;
-            // Accumulate the past time in the frame counter.
             frameCounter += pastTime;
 
-            // While there is enough unprocessed time for a frame
             while (unprocessedTime > frameTime) {
                 render = true;
 
-                // Subtract one frame worth of time from unprocessed time
                 unprocessedTime -= frameTime;
 
-                // Check if the game window should be closed and stop the game if so
                 if (Window.isCloseRequested())
                     stop();
 
-                // Update the time delta for frame time-based calculations
                 Time.setDelta(frameTime);
 
                 game.input();
@@ -76,24 +65,19 @@ public class MainComponent {
 
                 game.update();
 
-                // If a second has passed (used for frame rate monitoring) - print the frame count
                 if (frameCounter >= Time.SECOND) {
-                    // Print the frame count for monitoring purposes
                     System.out.println(frames);
                     frames = 0;
                     frameCounter = 0;
                 }
             }
 
-            // If rendering is required for this frame
             if (render) {
-                // Call the render method of the Game and Window classes and update the window
                 render();
                 frames++;
             }
             else {
                 try {
-                    // If rendering is not required, sleep briefly to control frame rate
                     Thread.sleep(1);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
