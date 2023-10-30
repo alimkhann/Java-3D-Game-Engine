@@ -69,9 +69,10 @@ public class MainComponent {
 
                 // Update the time delta for frame time-based calculations
                 Time.setDelta(frameTime);
-                Input.update();
 
                 game.input();
+                Input.update();
+
                 game.update();
 
                 // If a second has passed (used for frame rate monitoring) - print the frame count
