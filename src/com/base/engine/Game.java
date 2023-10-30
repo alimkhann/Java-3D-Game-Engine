@@ -6,9 +6,9 @@ public class Game {
     public Game () {
         mesh = new Mesh();
 
-        Vertex[] data = new Vertex[] {new Vertex(new Vector3f(-0.25f, -0.25f, 0)),
-                                      new Vertex(new Vector3f(-0.25f, 0.25f, 0)),
-                                      new Vertex(new Vector3f(0, 0.25f, 0)),};
+        Vertex[] data = new Vertex[] {new Vertex(new Vector3f(-1, -1, 0)),
+                                      new Vertex(new Vector3f(0, 1, 0)),
+                                      new Vertex(new Vector3f(1, -1, 0)),};
 
         mesh.addVertices(data);
     }
