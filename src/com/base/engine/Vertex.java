@@ -1,6 +1,8 @@
 package com.base.engine;
 
 public class Vertex {
+    public static final int SIZE = 3;
+
     private Vector3f pos;
 
     public Vertex(Vector3f pos) {
