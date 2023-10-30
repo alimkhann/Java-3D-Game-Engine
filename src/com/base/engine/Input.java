@@ -159,24 +159,8 @@ public class Input {
         return Keyboard.isKeyDown(keyCode);
     }
 
-    public static boolean getKeyDown (int keyCode) {
-        return downKeys.contains(keyCode);
-    }
-
-    public static boolean getKeyUp (int keyCode) {
-        return upKeys.contains(keyCode);
-    }
-
     public static boolean getMouse (int mouseButton) {
         return Mouse.isButtonDown(mouseButton);
-    }
-
-    public static boolean getMouseDown (int mouseButton) {
-        return downMouse.contains(mouseButton);
-    }
-
-    public static boolean getMouseUp (int mouseButton) {
-        return upMouse.contains(mouseButton);
     }
 
     public static Vector2f getMousePosition() {
