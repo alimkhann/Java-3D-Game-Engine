@@ -38,9 +38,8 @@ public class Game {
     public void update() {
         temp += Time.getDelta();
 
-        transform.setTranslation((float) Math.sin(temp), (float) Math.tan(temp), (float) Math.cos(temp));
-
-        // tempAmount = (float)(Math.sin(temp));
+        // transform.setTranslation((float) Math.sin(temp), (float) Math.tan(temp), (float) Math.cos(temp));
+        transform.setRotation(0, 0, (float) Math.sin(temp) * 180);
         // shader.setUniformf("uniformFloat", (float) Math.abs(Math.sin(temp)));
     }
 
