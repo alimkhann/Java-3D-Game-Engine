@@ -1,14 +1,12 @@
 package com.base.engine;
 
-import org.lwjgl.Sys;
-
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL32.*;
 
 public class Shader {
-    private int program;
+    private final int program;
 
-    private Shader() {
+    public Shader() {
         program = glCreateProgram();
 
         if(program == 0) {
@@ -36,15 +34,15 @@ public class Shader {
     public void compileShader() {
         glLinkProgram(program);
 
-        if(glGetShader(program, GL_LINK_STATUS) == 0) {
-            System.err.println(glGetShaderInfoLog(program, 1024));
+        if(glGetProgram(program, GL_LINK_STATUS) == 0) {
+            System.err.println(glGetProgramInfoLog(program, 1024));
             System.exit(1);
         }
 
         glValidateProgram(program);
 
-        if(glGetShader(program, GL_VALIDATE_STATUS) == 0) {
-            System.err.println(glGetShaderInfoLog(program, 1024));
+        if(glGetProgram(program, GL_VALIDATE_STATUS) == 0) {
+            System.err.println(glGetProgramInfoLog(program, 1024));
             System.exit(1);
         }
     }
@@ -65,6 +63,6 @@ public class Shader {
             System.exit(1);
         }
 
-        glAttachShader(shader, program);
+        glAttachShader(program, shader);
     }
 }
