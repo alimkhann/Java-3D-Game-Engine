@@ -5,19 +5,24 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 
 public class Mesh {
-    private int vbo;
+    private int vbo; // vertex buffer object
+    private int ibo; // index buffer object
     private int size;
 
     public Mesh() {
         vbo = glGenBuffers();
+        ibo = glGenBuffers();
         size = 0;
     }
 
-    public void addVertices(Vertex[] vertices) {
-        size = vertices.length * Vertex.SIZE;
+    public void addVertices(Vertex[] vertices, int[] indices) {
+        size = indices.length * Vertex.SIZE;
 
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glBufferData(GL_ARRAY_BUFFER, Util.createFlippedBuffer(vertices), GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, Util.createFlippedBuffer(indices), GL_STATIC_DRAW);
     }
 
     public void draw() {
@@ -26,7 +31,10 @@ public class Mesh {
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glVertexAttribPointer(0, 3, GL_FLOAT, false, Vertex.SIZE * 4, 0);
 
-        glDrawArrays(GL_TRIANGLES, 0, size);
+        // glDrawArrays(GL_TRIANGLES, 0, size);
+
+        glBindBuffer(GL_ARRAY_BUFFER, ibo);
+        glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, 0);
 
         glDisableVertexAttribArray(0);
     }

@@ -3,10 +3,15 @@ package com.base.engine;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 
 public class Util {
     public static FloatBuffer createFloatBuffer(int size) {
         return BufferUtils.createFloatBuffer(size);
+    }
+
+    public static IntBuffer createIntBuffer(int size) {
+        return BufferUtils.createIntBuffer(size);
     }
 
     public static FloatBuffer createFlippedBuffer(Vertex[] vertices) {
@@ -30,6 +35,14 @@ public class Util {
             for (int j = 0; j < 4; j++)
                 buffer.put(value.get(i, j));
 
+        buffer.flip();
+
+        return buffer;
+    }
+
+    public static IntBuffer createFlippedBuffer(int... values) {
+        IntBuffer buffer = createIntBuffer(values.length);
+        buffer.put(values);
         buffer.flip();
 
         return buffer;

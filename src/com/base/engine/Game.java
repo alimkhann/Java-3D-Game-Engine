@@ -1,19 +1,25 @@
 package com.base.engine;
 
 public class Game {
-    private Mesh mesh;
-    private Shader shader;
-    private Transform transform;
+    private final Mesh mesh;
+    private final Shader shader;
+    private final Transform transform;
 
     public Game () {
         mesh = new Mesh();
         shader = new Shader();
 
-        Vertex[] data = new Vertex[] {new Vertex(new Vector3f(-1, -1, 0)),
+        Vertex[] vertices = new Vertex[] {new Vertex(new Vector3f(-1, -1, 0)),
                                       new Vertex(new Vector3f(0, 1, 0)),
-                                      new Vertex(new Vector3f(1, -1, 0)),};
+                                      new Vertex(new Vector3f(1, -1, 0)),
+                                      new Vertex(new Vector3f(0, -1, 1))};
 
-        mesh.addVertices(data);
+        int[] indices = new int[] {0, 1, 3,
+                                   3, 1, 2,
+                                   2, 1, 0,
+                                   0, 2, 3};
+
+        mesh.addVertices(vertices, indices);
 
         transform = new Transform();
 
@@ -29,17 +35,20 @@ public class Game {
             System.out.println("UP");
 
         if(Input.getMouse(1))
-            System.out.println("Clicked at " + Input.getMousePosition().toString());
+            System.out.println("Clicked at " + Input.getMousePosition());
     }
 
     float temp = 0.0f;
     // float tempAmount = 0.0f;
 
     public void update() {
-        temp += Time.getDelta();
+        temp += (float) Time.getDelta();
 
-        // transform.setTranslation((float) Math.sin(temp), (float) Math.tan(temp), (float) Math.cos(temp));
-        transform.setRotation(0, 0, (float) Math.sin(temp) * 180);
+        float sinTemp = (float) Math.sin(temp);
+
+        // transform.setScale(sinTemp, sinTemp, sinTemp);
+        transform.setTranslation(sinTemp, 0, 0);
+        transform.setRotation(0, sinTemp * 180, 0);
         // shader.setUniformf("uniformFloat", (float) Math.abs(Math.sin(temp)));
     }
 
