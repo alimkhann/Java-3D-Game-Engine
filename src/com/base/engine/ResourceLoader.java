@@ -31,7 +31,7 @@ public class ResourceLoader {
     }
 
     public static Mesh loadMesh(String fileName) {
-        String[] splitArray = fileName.split("//.");
+        String[] splitArray = fileName.split("\\.");
         String extension = splitArray[splitArray.length - 1];
 
         if (!extension.equals("obj")) {
