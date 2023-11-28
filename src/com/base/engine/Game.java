@@ -4,10 +4,12 @@ public class Game {
     private final Mesh mesh;
     private final Shader shader;
     private final Transform transform;
+    private Camera camera;
 
     public Game () {
-        mesh = ResourceLoader.loadMesh("monkey.obj"); //new Mesh();
+        mesh = ResourceLoader.loadMesh("suzanne.obj"); //new Mesh();
         shader = new Shader();
+        camera = new Camera();
 
 //        Vertex[] vertices = new Vertex[] {new Vertex(new Vector3f(-1, -1, 0)),
 //                                      new Vertex(new Vector3f(0, 1, 0)),
@@ -22,6 +24,8 @@ public class Game {
 //        mesh.addVertices(vertices, indices);
 
         transform = new Transform();
+        Transform.setProjection(70f, Window.getWidth(), Window.getHeight(), 0.1f, 1000);
+        Transform.setCamera(camera);
 
         shader.addVertexShader(ResourceLoader.loadShader("basicVertex.vsh"));
         shader.addFragmentShader(ResourceLoader.loadShader("basicFragment.fsh"));
@@ -31,11 +35,7 @@ public class Game {
     }
 
     public void input() {
-        if(Input.getKey(Input.KEY_UP))
-            System.out.println("UP");
-
-        if(Input.getMouse(1))
-            System.out.println("Clicked at " + Input.getMousePosition());
+        camera.input();
     }
 
     float temp = 0.0f;
@@ -46,15 +46,15 @@ public class Game {
 
         float sinTemp = (float) Math.sin(temp);
 
-        transform.setScale(0.7f * sinTemp, 0.7f * sinTemp, 0.7f * sinTemp);
-        transform.setTranslation(sinTemp, 0, 0);
-        transform.setRotation(0, sinTemp * 180, 0);
+        //transform.setScale(0.7f * sinTemp, 0.7f * sinTemp, 0.7f * sinTemp);
+        //transform.setTranslation(sinTemp, 0, 3);
+        //transform.setRotation(0, sinTemp * 180, 0);
         // shader.setUniformf("uniformFloat", (float) Math.abs(Math.sin(temp)));
     }
 
     public void render() {
         shader.bind();
-        shader.setUniform("transform", transform.getTransformation());
+        shader.setUniform("transform", transform.getProjectedTransformation());
         mesh.draw();
     }
 }
