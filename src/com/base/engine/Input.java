@@ -138,32 +138,60 @@ public class Input {
     public static final int KEY_POWER           = 0xDE;
     public static final int KEY_SLEEP           = 0xDF;
 
-    private static ArrayList<Integer> lastKeys = new ArrayList<Integer>();
-    private static ArrayList<Integer> lastMouse = new ArrayList<Integer>();
+    private static boolean[] m_lastKeys = new boolean[NUM_KEYCODES];
+    private static boolean[] m_lastMouse = new boolean[NUM_MOUSEBUTTONS];
 
-    public static void update() {
-        lastKeys.clear();
-
+    public static void Update()
+    {
         for(int i = 0; i < NUM_KEYCODES; i++)
-            if (getKey(i))
-                lastKeys.add(i);
-
-        lastMouse.clear();
+            m_lastKeys[i] = GetKey(i);
 
         for(int i = 0; i < NUM_MOUSEBUTTONS; i++)
-            if (getMouse(i))
-                lastMouse.add(i);
+            m_lastMouse[i] = GetMouse(i);
     }
 
-    public static boolean getKey (int keyCode) {
+    public static boolean GetKey(int keyCode)
+    {
         return Keyboard.isKeyDown(keyCode);
     }
 
-    public static boolean getMouse (int mouseButton) {
+    public static boolean GetKeyDown(int keyCode)
+    {
+        return GetKey(keyCode) && !m_lastKeys[keyCode];
+    }
+
+    public static boolean GetKeyUp(int keyCode)
+    {
+        return !GetKey(keyCode) && m_lastKeys[keyCode];
+    }
+
+    public static boolean GetMouse(int mouseButton)
+    {
         return Mouse.isButtonDown(mouseButton);
     }
 
-    public static Vector2f getMousePosition() {
+    public static boolean GetMouseDown(int mouseButton)
+    {
+        return GetMouse(mouseButton) && !m_lastMouse[mouseButton];
+    }
+
+    public static boolean GetMouseUp(int mouseButton)
+    {
+        return !GetMouse(mouseButton) && m_lastMouse[mouseButton];
+    }
+
+    public static Vector2f GetMousePosition()
+    {
         return new Vector2f(Mouse.getX(), Mouse.getY());
+    }
+
+    public static void SetMousePosition(Vector2f pos)
+    {
+        Mouse.setCursorPosition((int)pos.getX(), (int)pos.getY());
+    }
+
+    public static void SetCursor(boolean enabled)
+    {
+        Mouse.setGrabbed(!enabled);
     }
 }
